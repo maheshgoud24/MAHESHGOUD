@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="aa200cc9-a137-43c8-bc5f-392092456e87" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="standaloneFlow" doc:id="f5d94085-be95-4375-afa0-de9e4759642e" >
+		<http:listener doc:name="Listener" doc:id="947aeb71-7d5d-4fce-b9b0-8f8caaf893b7" config-ref="HTTP_Listener_config" path="/test"/>
+		<logger level="INFO" doc:name="Logger" doc:id="8b79df14-e74f-4c6f-a358-d8eda621082f" message='#["flow has initiated"]'/>
+		<set-payload value='#[now() as String {format: "dd-MMM-YYYY HH:mm:ss"}]' doc:name="Set Payload" doc:id="d6e6678c-e7b7-4606-9d12-f41cfd2473d3" />
+		<logger level="INFO" doc:name="Logger" doc:id="81c75a95-a833-4f61-bb39-932b97a8bd18" message='#["FLOW IS COMPLETED "]'/>
+	</flow>
+</mule>
